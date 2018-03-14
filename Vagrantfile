@@ -25,6 +25,12 @@ sudo umount /media/VBoxGuestAdditions
 sudo rmdir /media/VBoxGuestAdditions
 SCRIPT
 
+$GOOGLE = <<SCRIPT
+sudo wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+sudo yum -y install ./google-chrome-stable_current_*.rpm
+sudo rm -f ./google-chrome-stable_current_*.rpm
+SCRIPT
+
 Vagrant.configure("2") do |config|  
 	
 	config.vm.box = "centos/7"
@@ -43,5 +49,6 @@ Vagrant.configure("2") do |config|
 	config.vm.provision "shell", inline: $GNOME
 	config.vm.provision "shell", inline: $GUEST
 	config.vm.provision :reload
+	config.vm.provision "shell", inline: $GOOGLE
 	
 end
