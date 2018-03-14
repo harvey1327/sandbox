@@ -28,9 +28,11 @@ SCRIPT
 Vagrant.configure("2") do |config|  
 	
 	config.vm.box = "centos/7"
+	config.vm.hostname = "Base"	
 
 	config.vm.provider "virtualbox" do |v|
 		v.gui = true
+		v.name = "Base"
 		v.customize ["modifyvm", :id, "--cpus", "2"]
 		v.customize ["modifyvm", :id, "--memory", "4096"]
 		v.customize ["modifyvm", :id, "--vram", "128"]	
