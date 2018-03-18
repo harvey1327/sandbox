@@ -39,15 +39,20 @@ Vagrant.configure("2") do |config|
 	config.vm.provider "virtualbox" do |v|
 		v.gui = true
 		v.name = "Base"
-		v.customize ["modifyvm", :id, "--cpus", "2"]
+		v.customize ["modifyvm", :id, "--cpus", "4"]
 		v.customize ["modifyvm", :id, "--memory", "4096"]
 		v.customize ["modifyvm", :id, "--vram", "128"]	
+		v.customize ["modifyvm", :id, "--graphicscontroller", "vboxvga"]
+		v.customize ["modifyvm", :id, "--ioapic", "on"]
+		v.customize ["modifyvm", :id, "--hwvirtex", "on"]
+		v.customize ["modifyvm", :id, "--accelerate3d", "on"]	
 	end
 
 	config.vm.provision "shell", inline: $UPDATE
 	config.vm.provision :reload
 	config.vm.provision "shell", inline: $GNOME
 	config.vm.provision "shell", inline: $GUEST
+	config.vm.provision "shell", inline: $UPDATE
 	config.vm.provision :reload
 	config.vm.provision "shell", inline: $GOOGLE
 	
